@@ -1,5 +1,5 @@
 [package]
-name = "imgui"
+name = "aqun-imgui"
 version = "0.1.0"
 authors = ["Akira Kano <a.kano1101@gmail.com>"]
 edition = "2018"
@@ -7,6 +7,9 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-#imgui = { git = "https://github.com/Gekkio/imgui-rs" }
-#glutin = { git = "https://github.com/rust-windowing/glutin" }
-glium = "*"
+clipboard = "0.5"
+imgui = "0.2.1"
+imgui-glium-renderer = "0.2.0"
+glium = "0.25.1"
+imgui-winit-support = "0.2.1"
+winit = "0.19.3"

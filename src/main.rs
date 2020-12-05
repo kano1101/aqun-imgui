@@ -1,35 +1,23 @@
+use imgui::*;
+
+mod support;
+
 fn main() {
-    #[allow(unused_imports)]
-    use glium::{glutin, Surface};
-
-    let event_loop = glutin::event_loop::EventLoop::new();
-    let wb = glutin::window::WindowBuilder::new();
-    let cb = glutin::ContextBuilder::new();
-    let display = glium::Display::new(wb, cb, &event_loop).unwrap();
-
-    event_loop.run(move |event, _, control_flow| {
-        let next_frame_time = std::time::Instant::now() +
-            std::time::Duration::from_nanos(16_666_667);
-        *control_flow = glutin::event_loop::ControlFlow::WaitUntil(next_frame_time);
-
-        match event {
-            glutin::event::Event::WindowEvent { event, .. } => match event {
-                glutin::event::WindowEvent::CloseRequested => {
-                    *control_flow = glutin::event_loop::ControlFlow::Exit;
-                    return;
-                },
-                _ => return,
-            },
-            glutin::event::Event::NewEvents(cause) => match cause {
-                glutin::event::StartCause::ResumeTimeReached { .. } => (),
-                glutin::event::StartCause::Init => (),
-                _ => return,
-            },
-            _ => return,
-        }
-
-        let mut target = display.draw();
-        target.clear_color(0.0, 0.0, 0.0, 1.0);
-        target.finish().unwrap();
+    let system = support::init(file!());
+    system.main_loop(|_, ui| {
+        Window::new(im_str!("Hello world"))
+            .size([300.0, 100.0], Condition::FirstUseEver)
+            .build(&ui, || {
+                ui.text(im_str!("Hello world!"));
+                ui.text(im_str!("こんにちは世界！"));
+                ui.text(im_str!("Hiragana: \xe3\x81\x8b\xe3\x81\x8d\xe3\x81\x8f\xe3\x81\x91\xe3\x81\x93 (kakikukeko)"));
+                ui.text(im_str!("This...is...imgui-rs!"));
+                ui.separator();
+                let mouse_pos = ui.io().mouse_pos;
+                ui.text(format!(
+                    "Mouse Position: ({:.1},{:.1})",
+                    mouse_pos[0], mouse_pos[1]
+                ));
+            });
     });
 }
