@@ -10,7 +10,6 @@ fn main() {
             .build(&ui, || {
                 ui.text(im_str!("Hello world!"));
                 ui.text(im_str!("こんにちは世界！"));
-                ui.text(im_str!("Hiragana: \xe3\x81\x8b\xe3\x81\x8d\xe3\x81\x8f\xe3\x81\x91\xe3\x81\x93 (kakikukeko)"));
                 ui.text(im_str!("This...is...imgui-rs!"));
                 ui.separator();
                 let mouse_pos = ui.io().mouse_pos;
