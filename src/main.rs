@@ -7,7 +7,8 @@ fn main() {
     system.main_loop(|_, ui| {
         Window::new(im_str!("Hello world"))
             .size([300.0, 100.0], Condition::FirstUseEver)
-            .build(&ui, || {
+            .draw_background(true)
+            .build(ui, || {
                 ui.text(im_str!("Hello world!"));
                 ui.text(im_str!("こんにちは世界！"));
                 ui.text(im_str!("This...is...imgui-rs!"));
